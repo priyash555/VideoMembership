@@ -1,0 +1,19 @@
+{% extends 'home/basic.html' %}
+
+{% block main %}
+    <br>
+    <br>
+    <p class="text-center h1 mb-4">Courses</p>
+<ul class="list-group list-group-flush">
+  <div>
+    {% for c in courses %}
+    <li class="list-group-item">
+    {{ c.title }}<br>
+    {{ c.description }}<br>
+    </li>
+    {% endfor %}
+    <li class="list-group-item"></li>
+</div>
+</ul>
+
+{% endblock main %}

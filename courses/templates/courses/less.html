@@ -1,0 +1,19 @@
+{% extends 'home/basic.html' %}
+
+{% block main %}
+    <br>
+    <br>
+    <p class="text-center h1 mb-4">Lessons</p>
+<ul class="list-group list-group-flush">
+  <div>
+    {% for l in lessons %}
+    <li class="list-group-item">
+    {{ l.title }}<br>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ l.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+    </li>
+    {% endfor %}
+    <li class="list-group-item"></li>
+</div>
+</ul>
+
+{% endblock main %}
