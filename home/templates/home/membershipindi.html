@@ -1,0 +1,66 @@
+{% extends './basic.html' %}
+{% load static %}
+
+{% block main %}
+ <link rel="stylesheet" type="text/css" href="{% static 'home/css/checkout.css' %}">
+<br>
+<br>
+<br>
+
+
+
+<div class="container">
+	<div class="row">
+		<h1>Payment</h1>
+		<div class="col-sm-4 col-md-4">
+			<p>Selected membership: {{ selected_membership.0 }}</p>
+			<p>Price: <strong>${{ selected_membership.0.price }}</strong><small>/month</small></p>
+
+
+<div id="collapseStripe" class="wrapper">
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- can't do this -->
+  <!-- <script src="{% static 'js/stripeV3.js' %}"></script> -->
+  {% if selected_membership.0.price != 0 and selected_membership.0 != current_membership%}
+ <form action={% url 'home-memberships-indiv' selected_membership.0 %} method="post">
+        {% csrf_token %}
+         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="{{ publishKey }}"
+                        data-description="Monthly Charge"
+                        data-amount="{{ selected_membership.0.price }}"
+                        data-locale="auto"></script>
+    </form>
+{% endif %}
+  
+  </div>
+  
+</div>
+
+<div id="stripe-token-handler" class="is-hidden">Success! Got token: <span class="token"></span></div>
+
+
+		</div>
+	</div>
+</div>
+
+
+<!-- script for the stripe form -->
+<script src="{% static 'home/js/checkout.js' %}"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- script for toggling display of the form -->
+<script type="text/javascript">
+    function toggleDisplay() {
+      var x = document.getElementById("collapseStripe");
+      if (x.style.display === "none") {
+          x.style.display = "block";
+      } else {
+          x.style.display = "none";
+      }
+    };
+</script>
+
+
+{% endblock main %}
