@@ -8,6 +8,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView, D
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Membership, UserMembership, Subscription
+from django.http import HttpResponseRedirect
 
 import stripe
 
@@ -91,7 +92,7 @@ def cancelSubscription(request):
     user_membership.save()
 
 
-    return redirect(reverse('home-memberships'))
+    return redirect(reverse('profileview'))
 
 @login_required
 def callfun(request,key):
