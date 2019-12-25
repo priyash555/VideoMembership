@@ -21,7 +21,7 @@
 			{% if object.membership_type != 'Free' %}
 			<form method="POST" action={% url 'home-memberships-indi' object.membership_type %}>
 				{% csrf_token %}
-				{% if object.membership_type != current_membership %}
+				{% if object != current_membership %}
 					<button class="btn btn-warning">Select</button>
 				{% else %}
 					<small>This is your current membership</small>

@@ -20,7 +20,10 @@ def about(request):
 
 def member(request):
     object = Membership.objects.all()
-    context = { 'object_list':object }
+    context = { 'object_list':object,
+                'current_membership':get_user_membership(request).membership
+    }
+    print(context)
     return render(request,'home/membership.html',context)
 
 def get_user_membership(request):
@@ -121,3 +124,13 @@ def callfun(request,key):
         )
         updateTransactionRecords(request,subscription.id,selected_membership)
         return redirect(reverse('home-memberships'))
+
+@login_required
+def profile_view(request):
+    user_membership = get_user_membership(request)
+    user_subscription = get_user_subscription(request)
+    context = {
+        'user_membership': user_membership,
+        'user_subscription': user_subscription
+    }
+    return render(request, "users/profile.html", context)

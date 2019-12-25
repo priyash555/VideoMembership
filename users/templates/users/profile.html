@@ -20,7 +20,7 @@
         <a type="button" class="btn btn-primary" href={% url 'users-update' %}>Update</a>
     </div> <!-- /container -->  
 
-    <div class="container">
+ <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-md-4">
 			{% if user_subscription != None %}
@@ -28,16 +28,16 @@
 
 				{% if user_subscription.active != False %}
 					<p>Next payment due: {{ user_subscription.get_next_billing_date }}</p>
-					<a href="{% url 'memberships:cancel' %}">Cancel subscription</a>
+					<a href="{% url 'home-memberships' %}">Cancel subscription</a>
 
 				{% else %}
 					<p>You don't have an active membership plan. Check them out here 
-						<a href="{% url 'memberships:select' %}"></a>
+						<a href="{% url 'home-memberships' %}"></a>
 					</p>
-				{% endif %}
+				{% endif %} 
 			{% endif %}
 		</div>
 	</div>
-</div>	
+</div>	 
 {% endblock main %}
     

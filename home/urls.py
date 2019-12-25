@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import starting, about, member, membersh, callfun
+from .views import starting, about, member, membersh, callfun, profile_view
 
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('memberships/', member , name='home-memberships'),
     path('memberships/<str:key>/', membersh , name='home-memberships-indi'),
     path('membership/<str:key>/', callfun , name='home-memberships-indiv'),
+    path('profile/', profile_view , name='profileview'),
 ]
