@@ -2,16 +2,16 @@ from django.shortcuts import render
 from .models import Course, Lesson
 from django.shortcuts import render, get_object_or_404
 from home.models import UserMembership
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required
 def cour(request):    
     courses = Course.objects.all()
-    if str(request.user) != 'AnonymousUser':
-        return render(request,'courses/hp.html',{'courses':courses})
-    return render(request,'home/starting.html')
+    return render(request,'courses/hp.html',{'courses':courses})
 
+@login_required
 def less(request,course):    
     courses = Course.objects.filter(slug=course).first()
     print(courses)
@@ -31,7 +31,6 @@ def less(request,course):
         context = {'lessons': lessons,
                     'membership':course_allowed_mem_types,
                     'havemem': 'false'}
-    print(context)
     return render(request,'courses/less.html',context)
 
 

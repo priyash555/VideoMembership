@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Membership, UserMembership, Subscription
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 import stripe
 
@@ -19,6 +20,7 @@ def starting(request):
 def about(request):
     return render(request,'home/about.html')
 
+@login_required
 def member(request):
     object = Membership.objects.all()
     context = { 'object_list':object,
@@ -33,6 +35,7 @@ def get_user_membership(request):
         return user_membership_qs.first()
     return None
 
+@login_required
 def membersh(request,key):
     object = Membership.objects.filter(membership_type=key)
     publishKey = settings.STRIPE_PUBLISHABLE_KEY
