@@ -8,7 +8,7 @@
   <div>
     {% for c in courses %}
     <li class="list-group-item">
-    {{ c.title }}<br>
+    <a href={% url 'courses-lesson' c.slug %}> {{ c.title }}</a><br>
     {{ c.description }}<br>
     </li>
     {% endfor %}

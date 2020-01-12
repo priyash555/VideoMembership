@@ -4,6 +4,6 @@ from .views import cour ,less
 
 
 urlpatterns = [
-    path('courses/', cour, name='courses-home'),
-    path('courses/<str:course>', less , name='courses-lesson'),
+    path('', cour, name='courses-home'),
+    path('<str:course>/', less , name='courses-lesson'),
 ]

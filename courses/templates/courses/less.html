@@ -8,12 +8,30 @@
   <div>
     {% for l in lessons %}
     <li class="list-group-item">
-    {{ l.title }}<br>
+    <h5>{{ l.title }}</h5><br>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ l.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
     </li>
     {% endfor %}
     <li class="list-group-item"></li>
 </div>
 </ul>
+
+<div>
+  {% if havemem == 'false' %}
+    <h4><p> To watch the full course suscribe to the following membership in <a href={% url 'home-memberships' %}>Memberships</a></p> 
+    <ul class="list-group list-group-flush">
+    <div>
+      {% for u in membership %}
+      <li class="list-group-item">
+      {{ u }}
+      </li>
+      {% endfor %}
+      <li class="list-group-item"></li>
+  </div>
+  </ul>
+  </h4>
+  {% else %}
+  {% endif %}
+</div>
 
 {% endblock main %}

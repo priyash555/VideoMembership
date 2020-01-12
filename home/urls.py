@@ -4,7 +4,7 @@ from .views import starting, about, member, membersh, callfun, profile_view, can
 
 
 urlpatterns = [
-    path('', starting, name='home-home'),
+    # path('', starting, name='home-home'),
     path('about/', about , name='home-about'),
     path('memberships/', member , name='home-memberships'),
     path('memberships/<str:key>/', membersh , name='home-memberships-indi'),

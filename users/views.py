@@ -11,7 +11,7 @@ def reg(request):
         if form.is_valid():
             form.save()
             messages.success(request, f'Account Created')
-            return redirect('home-home')
+            return redirect('courses-home')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})

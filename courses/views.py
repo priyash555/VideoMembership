@@ -11,14 +11,25 @@ def cour(request):
     return render(request,'courses/hp.html',{'courses':courses})
 
 def less(request,course):    
-    lessons = Lesson.objects.filter(course=1)
-    courses = Course.objects.filter(title=lessons[0].course.title).first()
+    courses = Course.objects.filter(slug=course).first()
+    print(courses)
+    lessons = Lesson.objects.filter(course=courses)
     user_membership = get_object_or_404(UserMembership, user=request.user)
     user_membership_type = user_membership.membership.membership_type
     course_allowed_mem_types = courses.allowed_memberships.all()
-    context = { 'lessons': None }
-    if course_allowed_mem_types.filter(membership_type=user_membership_type).exists():
-        context = {'lessons': lessons}
+    context = { 'lessons': None,
+               'membership':course_allowed_mem_types,
+               'havemem': 'true' }
+    if course_allowed_mem_types.filter(membership_type=user_membership_type).exists() or course_allowed_mem_types.filter(membership_type='Free').exists():
+        context = {'lessons': lessons,
+                    'membership':course_allowed_mem_types,
+                    'havemem': 'true'}
+    else:
+        lessons = Lesson.objects.filter(position=1,course=courses)
+        context = {'lessons': lessons,
+                    'membership':course_allowed_mem_types,
+                    'havemem': 'false'}
+    print(context)
     return render(request,'courses/less.html',context)
 
 
