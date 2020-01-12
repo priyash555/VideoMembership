@@ -8,7 +8,9 @@ from home.models import UserMembership
 
 def cour(request):    
     courses = Course.objects.all()
-    return render(request,'courses/hp.html',{'courses':courses})
+    if str(request.user) != 'AnonymousUser':
+        return render(request,'courses/hp.html',{'courses':courses})
+    return render(request,'home/starting.html')
 
 def less(request,course):    
     courses = Course.objects.filter(slug=course).first()
@@ -31,6 +33,7 @@ def less(request,course):
                     'havemem': 'false'}
     print(context)
     return render(request,'courses/less.html',context)
+
 
 
 
