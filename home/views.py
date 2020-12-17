@@ -40,8 +40,10 @@ def membersh(request,key):
     object = Membership.objects.filter(membership_type=key)
     publishKey = settings.STRIPE_PUBLISHABLE_KEY
     user_membership = get_user_membership(request)
+    stripeprice = object[0].price * 100
     context = { 'selected_membership':object,
-                'publishKey': publishKey }
+                'publishKey': publishKey,
+                'stripeprice':stripeprice }
     return render(request,'home/membershipindi.html',context)
 
 

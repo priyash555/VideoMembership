@@ -28,7 +28,7 @@
          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                         data-key="{{ publishKey }}"
                         data-description="Monthly Charge"
-                        data-amount="{{ selected_membership.0.price }}"
+                        data-amount="{{ stripeprice }}"
                         data-locale="auto"></script>
     </form>
 {% endif %}
